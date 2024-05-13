@@ -1,3 +1,5 @@
+@extends('Layouts.layout')
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,6 +18,47 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                <div class="dropdown hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <button class="nav-link dropdown-toggle" type="button" id="requirementDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ __('Requirement') }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="requirementDropdown">
+                        <li><a class="dropdown-item" href="{{ route('division.index') }}">Division</a></li>
+                        <li><a class="dropdown-item" href="#">Link 2</a></li>
+                    </ul>
+                </div>
+
+                <div class="dropdown hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <button class="nav-link dropdown-toggle" type="button" id="requirementDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ __('Procurement') }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="requirementDropdown">
+                        <li><a class="dropdown-item" href="{{ route('dashboard') }}">Link 1</a></li>
+                        <li><a class="dropdown-item" href="#">Link 2</a></li>
+                    </ul>
+                </div>
+
+                <div class="dropdown hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <button class="nav-link dropdown-toggle" type="button" id="requirementDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ __('Asset') }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="requirementDropdown">
+                        <li><a class="dropdown-item" href="{{ route('dashboard') }}">Link 1</a></li>
+                        <li><a class="dropdown-item" href="#">Link 2</a></li>
+                    </ul>
+                </div>
+
+                <div class="dropdown hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <button class="nav-link dropdown-toggle" type="button" id="requirementDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ __('Catalog') }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="requirementDropdown">
+                        <li><a class="dropdown-item" href="{{ route('dashboard') }}">Link 1</a></li>
+                        <li><a class="dropdown-item" href="#">Link 2</a></li>
+                    </ul>
+                </div>
+
             </div>
 
             <!-- Settings Dropdown -->
