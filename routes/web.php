@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\AssetController;
+use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\MaintenanceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,18 +31,26 @@ Route::middleware('auth')->group(function () {
     Route::delete('/division/{division_id}/delete', [DivisionController::class, 'delete'])->name('division.delete');
 
     //BUDGET
+    Route::get('/budget', [BudgetController::class, 'index'])->name('budget.index');
+
 
     //EVENT
+    Route::get('/event', [EventController::class, 'index'])->name('event.index');
+
 
     //FUND
 
     //ALLOCATION
 
     //ASSET
+    Route::get('/asset', [AssetController::class, 'index'])->name('asset.index');
+
 
     //BOM
 
     //MAINTENANCE
+    Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maintenance.index');
+
 
 });
 

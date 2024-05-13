@@ -23,26 +23,26 @@
                         {{ __('Division') }}
                     </x-nav-link>
                 </div>
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('#')" :active="request()->routeIs('#')" class="text-decoration-none">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('budget.index')" :active="request()->routeIs('budget.index')" class="text-decoration-none">
                         {{ __('Budget') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('#')" :active="request()->routeIs('#')" class="text-decoration-none">
+                    <x-nav-link :href="route('event.index')" :active="request()->routeIs('event.index')" class="text-decoration-none">
                         {{ __('Event') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('#')" :active="request()->routeIs('#')" class="text-decoration-none">
+                    <x-nav-link :href="route('asset.index')" :active="request()->routeIs('asset.index')" class="text-decoration-none">
                         {{ __('Assets') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('#')" :active="request()->routeIs('#')" class="text-decoration-none">
+                    <x-nav-link :href="route('maintenance.index')" :active="request()->routeIs('maintenance.index')" class="text-decoration-none">
                         {{ __('Maintenance') }}
                     </x-nav-link>
-                </div> --}}
+                </div>
 
                 {{-- <div class="dropdown hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <button class="nav-link dropdown-toggle" type="button" id="requirementDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -102,7 +102,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('profile.edit')" class="text-decoration-none">
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -112,7 +112,8 @@
 
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                this.closest('form').submit();"
+                                    class="text-decoration-none">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
