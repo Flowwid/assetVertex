@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('asset_id');
             $table->string('asset_name');
             $table->unsignedBigInteger('bom_id');
-            $table->string('bom_name');
+            $table->string('bom_serial');
             $table->unsignedBigInteger('division_id');
             $table->string('division_name');
 

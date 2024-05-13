@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Fund extends Model
 {
     use HasFactory;
 
-    protected $table = 'event';
+    protected $table = 'fund';
 
     protected $fillable = [
-        'name',
-        'year',
-        'implementation',
-        'nominal',
+        'used',
+        'event_id',
+        'event_name',
+        'budget_id',
+        'budget_name',
     ];
 }

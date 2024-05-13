@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Allocation extends Model
 {
     use HasFactory;
 
-    protected $table = 'event';
+    protected $table = 'allocation';
 
     protected $fillable = [
-        'name',
-        'year',
-        'implementation',
-        'nominal',
+        'event_id',
+        'event_name',
+        'division_id',
+        'division_name',
     ];
 }

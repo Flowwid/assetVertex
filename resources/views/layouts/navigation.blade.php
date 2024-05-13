@@ -14,12 +14,37 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-decoration-none">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('division.index')" :active="request()->routeIs('division.index')" class="text-decoration-none">
+                        {{ __('Division') }}
+                    </x-nav-link>
+                </div>
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('#')" :active="request()->routeIs('#')" class="text-decoration-none">
+                        {{ __('Budget') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('#')" :active="request()->routeIs('#')" class="text-decoration-none">
+                        {{ __('Event') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('#')" :active="request()->routeIs('#')" class="text-decoration-none">
+                        {{ __('Assets') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('#')" :active="request()->routeIs('#')" class="text-decoration-none">
+                        {{ __('Maintenance') }}
+                    </x-nav-link>
+                </div> --}}
 
-                <div class="dropdown hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                {{-- <div class="dropdown hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <button class="nav-link dropdown-toggle" type="button" id="requirementDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ __('Requirement') }}
                     </button>
@@ -57,7 +82,7 @@
                         <li><a class="dropdown-item" href="{{ route('dashboard') }}">Link 1</a></li>
                         <li><a class="dropdown-item" href="#">Link 2</a></li>
                     </ul>
-                </div>
+                </div> --}}
 
             </div>
 

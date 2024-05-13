@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Bom extends Model
 {
     use HasFactory;
 
-    protected $table = 'event';
+    protected $table = 'bom';
 
     protected $fillable = [
-        'name',
-        'year',
-        'implementation',
-        'nominal',
+        'serial',
+        'condition',
+        'status',
+        'note',
+        'asset_id',
+        'asset_name',
     ];
 }
