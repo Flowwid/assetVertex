@@ -20,24 +20,25 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //DIVISION
-
-    //BUDGETING
-
-    //EVENT
-
-    //ASSET-CATEGORY
-
-    //ASSET-LIST
-
-    //ASSET-BOM
-
-    //MAINTENANCE
-    //division
     Route::get('/division', [DivisionController::class, 'index'])->name('division.index');
     Route::post('/division', [DivisionController::class, 'insert'])->name('division.insert');
     Route::get('/division/edit/{division_id}', [DivisionController::class, 'edit'])->name('division.edit');
     Route::put('/division/{division_id}/update', [DivisionController::class, 'update'])->name('division.update');
     Route::delete('/division/{division_id}/delete', [DivisionController::class, 'delete'])->name('division.delete');
+
+    //BUDGET
+
+    //EVENT
+
+    //FUND
+
+    //ALLOCATION
+
+    //ASSET
+
+    //BOM
+
+    //MAINTENANCE
 
 });
 

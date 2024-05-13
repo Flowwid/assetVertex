@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('maintenance', function (Blueprint $table) {
+        Schema::create('bom', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('condition');
-            $table->text('description');
-            $table->string('status');
-            $table->string('division_id');
-            $table->string('division_name');
-            $table->string('asset_bom_id');
-            $table->string('asset_bom_serial');
-            $table->string('feedback_note');
             $table->timestamps();
+            $table->string('serial');
+            $table->string('condition');
+            $table->string('status');
+            $table->string('note');
+            $table->unsignedBigInteger('asset_id');
+            $table->string('asset_name');
+
+            $table->foreign('asset_id')->references('id')->on('asset')->onDelete('cascade');
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('maintenance');
+        Schema::dropIfExists('bom');
     }
 };
