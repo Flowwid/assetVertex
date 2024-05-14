@@ -14,6 +14,6 @@ class Asset extends Model
     protected $fillable = [
         'name',
         'type',
-        'spesification',
+        'specification',
     ];
 }

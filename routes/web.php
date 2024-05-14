@@ -46,6 +46,10 @@ Route::middleware('auth')->group(function () {
 
     //ASSET
     Route::get('/asset', [AssetController::class, 'index'])->name('asset.index');
+    Route::post('/asset', [AssetController::class, 'insert'])->name('asset.insert');
+    Route::get('/asset/edit/{asset_id}', [AssetController::class, 'edit'])->name('asset.edit');
+    Route::put('/asset/{asset_id}/update', [AssetController::class, 'update'])->name('asset.update');
+    Route::delete('/asset/{asset_id}/delete', [AssetController::class, 'delete'])->name('asset.delete');
 
     //BOM
 

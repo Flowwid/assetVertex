@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('type');
-            $table->string('spesification');
+            $table->string('specification');
         });
     }
 
