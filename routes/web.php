@@ -33,10 +33,12 @@ Route::middleware('auth')->group(function () {
     //BUDGET
     Route::get('/budget', [BudgetController::class, 'index'])->name('budget.index');
 
-
     //EVENT
     Route::get('/event', [EventController::class, 'index'])->name('event.index');
-
+    Route::post('/event', [EventController::class, 'insert'])->name('event.insert');
+    Route::get('/event/edit/{event_id}', [EventController::class, 'edit'])->name('event.edit');
+    Route::put('/event/{event_id}/update', [EventController::class, 'update'])->name('event.update');
+    Route::delete('/event/{event_id}/delete', [EventController::class, 'delete'])->name('event.delete');
 
     //FUND
 
@@ -44,7 +46,6 @@ Route::middleware('auth')->group(function () {
 
     //ASSET
     Route::get('/asset', [AssetController::class, 'index'])->name('asset.index');
-
 
     //BOM
 
