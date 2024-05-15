@@ -32,6 +32,11 @@ Route::middleware('auth')->group(function () {
 
     //BUDGET
     Route::get('/budget', [BudgetController::class, 'index'])->name('budget.index');
+    Route::post('/budget', [BudgetController::class, 'insert'])->name('budget.insert');
+    Route::get('/budget/edit/{budget_id}', [BudgetController::class, 'edit'])->name('budget.edit');
+    Route::put('/budget/{budget_id}/update', [BudgetController::class, 'update'])->name('budget.update');
+    Route::delete('/budget/{budget_id}/delete', [BudgetController::class, 'delete'])->name('budget.delete');
+
 
     //EVENT
     Route::get('/event', [EventController::class, 'index'])->name('event.index');
