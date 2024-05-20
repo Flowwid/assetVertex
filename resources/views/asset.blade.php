@@ -4,7 +4,13 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Asset') }}
         </h2>
-        <a href="#" class="text-sm hover:text-gray-700 btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal">Add Data</a>
+        <div>
+            <a href="#" class="text-sm hover:text-gray-700 btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal">Add Data</a>
+            <form action="{{ route('asset.export') }}" method="POST">
+    @csrf
+    <button type="submit" class="text-sm hover:text-gray-700 btn btn-grey btn-export">Export Data</button>
+</form>
+        </div>
     </div>
 </x-slot>
 
@@ -18,29 +24,61 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form method="post" action="{{route('asset.insert')}}">
-                @csrf
-                @method('post')
-                    <!-- Input fields -->
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="type" class="form-label">Type</label>
-                        <input type="text" class="form-control" name="type" id="type" placeholder="Enter Type">
-                    </div>
-                    <div class="mb-3">
-                        <label for="specification" class="form-label">Specification</label>
-                        <input type="text" class="form-control" name="specification" id="specification" placeholder="Enter specification">
-                    </div>
-                    <!-- End input fields -->
+                <div id="inputFields">
+                    <form method="post" id="addDataForm" action="{{ route('asset.insert') }}">
+                        @csrf
+                        @method('post')
+                        <!-- Input fields -->
+                        <div class="mb-3">
+                            <label for="inputMethod">Choose Input Method:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="inputMethod" id="inputType" value="type" checked>
+                                <label class="form-check-label" for="inputType">
+                                    Normal Typing
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="inputMethod" id="inputCSV" value="csv">
+                                <label class="form-check-label" for="inputCSV">
+                                    CSV Upload
+                                </label>
+                            </div>
+                        </div>
+                        <div id="normalInputFields">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="type" class="form-label">Type</label>
+                                <input type="text" class="form-control" name="type" id="type" placeholder="Enter Type">
+                            </div>
+                            <div class="mb-3">
+                                <label for="specification" class="form-label">Specification</label>
+                                <input type="text" class="form-control" name="specification" id="specification" placeholder="Enter specification">
+                            </div>
+                        </div>
+                        <!-- End input fields -->
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" id="saveDataButton">Input</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <input type="submit" value="Input" class="btn btn-primary" id="saveDataButton"></input>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <div id="csvInputFields" style="display: none;">
+                    <form action="{{ route('asset.import') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Import CSV</label>
+                            <input type="file" name="file" id="file" accept=".csv">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" id="saveDataButton">Input</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -135,6 +173,8 @@
 </x-app-layout>
 
 <script>
+
+    //Edit modal
     document.addEventListener('DOMContentLoaded', function () {
         var editButtons = document.querySelectorAll('.edit-btn');
         editButtons.forEach(function (button) {
@@ -151,5 +191,72 @@
             });
         });
     });
+
+    //Radio View
+    document.addEventListener("DOMContentLoaded", function () {
+        const inputTypeRadio = document.getElementById('inputType');
+        const inputCSVRadio = document.getElementById('inputCSV');
+        
+        const normalInputFields = document.getElementById('normalInputFields');
+        const csvInputFields = document.getElementById('csvInputFields');
+        
+        const modalFooter = document.querySelector('.modal-footer');
+        
+        function toggleInputFields() {
+            if (inputTypeRadio.checked) {
+                normalInputFields.style.display = 'block';
+                csvInputFields.style.display = 'none';
+                modalFooter.style.display = 'block'; 
+            } else if (inputCSVRadio.checked) {
+                normalInputFields.style.display = 'none';
+                csvInputFields.style.display = 'block';
+                modalFooter.style.display = 'none'; 
+            }
+        }
+        
+        toggleInputFields();
+        
+        inputTypeRadio.addEventListener('change', toggleInputFields);
+        inputCSVRadio.addEventListener('change', toggleInputFields);
+    });
+
+    //Export csv
+    // document.addEventListener('DOMContentLoaded', function () {
+    // var exportButton = document.querySelector('.btn-export');
+
+    // exportButton.addEventListener('click', function () {
+    //     exportTableToCSV();
+    // });
+
+    // function exportTableToCSV() {
+    //     var rows = document.querySelectorAll('table tbody tr');
+    //     var csvContent = "data:text/csv;charset=utf-8,";
+
+    //     rows.forEach(function(row) {
+    //         var rowData = [];
+    //         var cols = row.querySelectorAll('td');
+
+    //         cols.forEach(function(col, index) {
+    //             if (index === 0 || index === 1 || index === 2) {
+    //                 rowData.push('"' + col.innerText.replace(/"/g, '""') + '"'); // Escape double quotes
+    //             }
+    //         });
+
+    //         csvContent += rowData.join(',') + '\n';
+    //     });
+
+    //     // Create a CSV file
+    //     var encodedUri = encodeURI(csvContent);
+    //     var link = document.createElement("a");
+    //     link.setAttribute("href", encodedUri);
+    //     link.setAttribute("download", "table_data.csv");
+    //     document.body.appendChild(link);
+
+    //     // Trigger download
+    //     link.click();
+    //     }
+    // });
+    
 </script>
+
 

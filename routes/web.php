@@ -32,6 +32,11 @@ Route::middleware('auth')->group(function () {
 
     //BUDGET
     Route::get('/budget', [BudgetController::class, 'index'])->name('budget.index');
+    Route::post('/budget', [BudgetController::class, 'insert'])->name('budget.insert');
+    Route::get('/budget/edit/{budget_id}', [BudgetController::class, 'edit'])->name('budget.edit');
+    Route::put('/budget/{budget_id}/update', [BudgetController::class, 'update'])->name('budget.update');
+    Route::delete('/budget/{budget_id}/delete', [BudgetController::class, 'delete'])->name('budget.delete');
+
 
     //EVENT
     Route::get('/event', [EventController::class, 'index'])->name('event.index');
@@ -46,10 +51,13 @@ Route::middleware('auth')->group(function () {
 
     //ASSET
     Route::get('/asset', [AssetController::class, 'index'])->name('asset.index');
-    Route::post('/asset', [AssetController::class, 'insert'])->name('asset.insert');
+    Route::post('/asset/insert', [AssetController::class, 'insert'])->name('asset.insert');
     Route::get('/asset/edit/{asset_id}', [AssetController::class, 'edit'])->name('asset.edit');
     Route::put('/asset/{asset_id}/update', [AssetController::class, 'update'])->name('asset.update');
     Route::delete('/asset/{asset_id}/delete', [AssetController::class, 'delete'])->name('asset.delete');
+    Route::post('/asset/import', [AssetController::class, 'import'])->name('asset.import');
+    Route::post('/asset/export', [AssetController::class, 'export'])->name('asset.export');
+
 
     //BOM
 
