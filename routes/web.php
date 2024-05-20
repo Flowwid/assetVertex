@@ -9,7 +9,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\MaintenanceController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome2');
 });
 
 //DASHBOARD

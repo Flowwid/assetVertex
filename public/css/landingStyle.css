@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Adjust the height as needed */
+    background-image: url('../images/backgroundLandingMountain.png');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Assuming you want the text to be white for better visibility */
+    padding-left: 10%; /* Apply padding to header to match padding in nav */
+    padding-right: 10%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.left, .right {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.left a, .right a {
+    text-decoration: none;
+    color: white;
+}
+
+.right a {
+    color: #381DDB;
+    font-weight: bold;
+}
+
+.login{
+    border: 2px solid #381DDB; 
+    padding: 10px;
+}
+
+.head {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    padding-left: 10%; /* Same padding as header and nav */
+    padding-right: 10%;
+    text-align: left; /* Align text to the left */
+}
+
+.head .title1, .head .title2, .head .title3 {
+    margin: 30px 0;
+}
+
+.title1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.title2 {
+    font-size: 30px;
+    max-width: 600px;
+    color: #FFA3A3;
+}
+
+.title3 {
+    font-size: 20px;
+    max-width: 450px;
+}
+
+.head .button {
+    margin-top: 20px;
+}
+
+.head .button p {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: to make the button more visible */
+    color: white;
+    cursor: pointer;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .head {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .left, .right {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .title2 {
+        font-size: 24px;
+        max-width: 100%;
+    }
+
+    .title3 {
+        font-size: 18px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        padding: 10px;
+    }
+
+    .head {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .title2 {
+        font-size: 20px;
+    }
+
+    .title3 {
+        font-size: 16px;
+    }
+
+    .head .button p {
+        padding: 8px 16px;
+    }
+}
