@@ -15,7 +15,7 @@ class AssetController extends Controller
 
     public function insert(Request $request){
         $data = $request->validate([
-            'name' => 'required',
+            'name' => 'required', 
             'type' => 'required',
             'specification' => 'required',
         ]);
