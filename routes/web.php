@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FundController;
 use App\Http\Controllers\MaintenanceController;
 
 Route::get('/', function () {
@@ -46,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/event/{event_id}/delete', [EventController::class, 'delete'])->name('event.delete');
 
     //FUND
+    Route::get('/budget/{budget_id}/fund/', [FundController::class, 'index'])->name('fund.index');
+
 
     //ALLOCATION
 

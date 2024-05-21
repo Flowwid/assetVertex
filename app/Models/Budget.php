@@ -16,4 +16,8 @@ class Budget extends Model
         'year',
         'nominal',
     ];
+
+    public function fund() {
+        return $this->hasMany(Fund::class);
+    }
 }

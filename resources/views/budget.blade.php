@@ -111,6 +111,7 @@
                             <td class="px-4 py-2">{{$budget->name}}</td>
                             <td class="px-4 py-2">{{$budget->year}}</td>
                             <td class="px-4 py-2">{{$budget->nominal}}</td>
+                            <td><a href="{{ route('fund.index', ['budget_id' => $budget->id]) }}">Detail</a></td>
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="#" class="edit-btn" 
                                 data-name="{{$budget->name}}" data-year="{{$budget->year}}" data-nominal="{{$budget->nominal}}"

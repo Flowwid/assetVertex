@@ -17,4 +17,8 @@ class Event extends Model
         'implementation',
         'nominal',
     ];
+
+    public function fund() {
+        return $this->hasMany(Fund::class);
+    }
 }
