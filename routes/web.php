@@ -8,6 +8,7 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FundController;
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\BomController;
 
 Route::get('/', function () {
     return view('welcome2');
@@ -66,6 +67,10 @@ Route::middleware('auth')->group(function () {
 
 
     //BOM
+    Route::get('/asset/{asset_id}/bom/', [BomController::class, 'index'])->name('bom.index');
+    Route::post('/asset/{asset_id}/bom/', [BomController::class, 'insert'])->name('bom.insert');
+    Route::put('/asset/{asset_id}/bom/{bom_id}/update', [BomController::class, 'update'])->name('bom.update');
+    Route::delete('/asset/{asset_id}/bom/{bom_id}/delete', [BomController::class, 'delete'])->name('bom.delete');
 
     //MAINTENANCE
     Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maintenance.index');

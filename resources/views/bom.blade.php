@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Fund') }}
+                {{ __('Bom') }}
             </h2>
-            <h5>{{ $budgets->name }}</h5>
-            <a href="#" class="text-sm hover:text-gray-700 btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal">Add Fund</a>
+            <h5>{{ $assets->name }}</h5>
+            <a href="#" class="text-sm hover:text-gray-700 btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal">Add Bom</a>
         </div>
     </x-slot>
 
@@ -18,25 +18,26 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form method="post" action="{{ route('fund.insert', ['budget_id' => $budgets->id]) }}">
+            <form method="post" action="{{ route('bom.insert', ['asset_id' => $assets->id]) }}">
                 @csrf
                 @method('post')
                     <!-- Input fields -->
                     <div class="mb-3">
-                        <label for="used" class="form-label">Used</label>
-                        <input type="number" class="form-control" name="used" id="used" placeholder="Enter Used Nominal">
+                        <label for="serial" class="form-label">Serial</label>
+                        <input type="text" class="form-control" name="serial" id="serial" placeholder="Enter Serial">
                     </div>
                     <div class="mb-3">
-                        <input type="hidden" class="form-control" name="event_name" id="event_name" placeholder="Enter Used Nominal" value="{{ $budgets->name }}">
+                        <label for="condition" class="form-label">Condition</label>
+                        <input type="text" class="form-control" name="condition" id="condition" placeholder="Enter Condition">
                     </div>
                     <div class="mb-3">
-                        <label for="event-option" class="form-label">Event</label>
-                        <select class="form-control" id="event-option" name="event_id">
-                            @foreach ($events as $event)
-                                <option value="{{ $event->id }}">{{ $event->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>                    
+                        <label for="status" class="form-label">Status</label>
+                        <input type="text" class="form-control" name="status" id="status" placeholder="Enter Status">
+                    </div>
+                    <div class="mb-3">
+                        <label for="note" class="form-label">Note</label>
+                        <input type="text" class="form-control" name="note" id="note" placeholder="Enter Note">
+                    </div>
                     <!-- End input fields -->
                 </div>
                 <div class="modal-footer">
@@ -61,20 +62,22 @@
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
-                        <label for="editUsed" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="used" id="editUsed" placeholder="Enter used nominal">
+                        <label for="serial" class="form-label">Serial</label>
+                        <input type="text" class="form-control" name="serial" id="editSerial" placeholder="Enter Serial">
                     </div>
                     <div class="mb-3">
-                        <input type="hidden" class="form-control" name="event_name" id="editEventName">
+                        <label for="condition" class="form-label">Condition</label>
+                        <input type="text" class="form-control" name="condition" id="editCondition" placeholder="Enter Condition">
                     </div>
                     <div class="mb-3">
-                        <label for="event-option" class="form-label">Event</label>
-                        <select class="form-control" id="editEventOption" name="event_id">
-                            @foreach ($events as $event)
-                                <option value="{{ $event->id }}">{{ $event->name }}</option>
-                            @endforeach
-                        </select>
-                    </div> 
+                        <label for="status" class="form-label">Status</label>
+                        <input type="text" class="form-control" name="status" id="editStatus" placeholder="Enter Status">
+                    </div>
+                    <div class="mb-3">
+                        <label for="note" class="form-label">Note</label>
+                        <input type="text" class="form-control" name="note" id="editNote" placeholder="Enter Note">
+                    </div>
+
                     <div class="modal-footer">
                         <input type="submit" value="Edit" class="btn btn-primary" id="saveDataButton">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -85,7 +88,6 @@
     </div>
 </div>
 
-
 <!-- body -->
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -95,10 +97,16 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Used
+                                Serial
                             </th>
                             <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Event
+                                Condition
+                            </th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status
+                            </th>
+                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Note
                             </th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Edit</span>
@@ -109,67 +117,57 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach($funds as $fund)
+                        @foreach($boms as $bom)
                         <tr>
-                            <td class="px-4 py-2">{{$fund->used}}</td>
-                            <td class="px-4 py-2">{{$fund->event_name}}</td>
+                            <td class="px-4 py-2">{{$bom->serial}}</td>
+                            <td class="px-4 py-2">{{$bom->condition}}</td>
+                            <td class="px-4 py-2">{{$bom->status}}</td>
+                            <td class="px-4 py-2">{{$bom->note}}</td>
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class="edit-btn btn btn-warning" 
-                                data-used="{{$fund->used}}" data-event-id="{{$fund->event_id}}" data-event-name="{{$fund->event_name}}"
-                                data-action="{{route('fund.update', ['fund_id' => $fund->id, 'budget_id' => $fund->budget_id])}}"
+                                <a href="#" class="edit-btn btn btn-warning"
+                                data-serial="{{$bom->serial}}" data-condition="{{$bom->condition}}" data-status="{{$bom->status}}" data-note="{{$bom->note}}"
+                                data-action="{{route('bom.update', ['bom_id' => $bom->id, 'asset_id' => $bom->asset_id])}}"
                                 data-bs-toggle="modal" data-bs-target="#editDataModal">Edit</a>
                             </td>
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                                <form method="post" action="{{ route('fund.delete', ['budget_id' => $fund->budget_id, 'fund_id' => $fund->id]) }}">
+                                <form method="post" action="{{ route('bom.delete', ['asset_id' => $bom->asset_id, 'bom_id' => $bom->id]) }}">
                                     @csrf
                                     @method('delete')
                                     <input type="submit" value="Delete" class="btn btn-danger"></input>
                                 </form>
-                            </td>                            
+                            </td>  
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+        
     </div>
 </div>
+
 
 </x-app-layout>
 
 <script>
-    document.getElementById("event-option").addEventListener("change", function() {
-        var selectedEventOption = this.options[this.selectedIndex];
-        var eventName = selectedEventOption.text;
-        document.getElementById("event_name").value = eventName; 
-    });
-</script>
+document.addEventListener('DOMContentLoaded', function () {
+    var editButtons = document.querySelectorAll('.edit-btn');
+    
+    editButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var serial = this.getAttribute('data-serial');
+            var condition = this.getAttribute('data-condition');
+            var status = this.getAttribute('data-status');
+            var note = this.getAttribute('data-note');
+            var action = this.getAttribute('data-action');  // Correctly get the action attribute
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var editButtons = document.querySelectorAll('.edit-btn');
-        
-        editButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                var used = this.getAttribute('data-used');
-                var event_id = this.getAttribute('data-event-id');
-                var event_name = this.getAttribute('data-event-name');
-                var action = this.getAttribute('data-action');
-
-                var form = document.getElementById('editDataForm');
-                form.action = action;
-                form.querySelector('#editUsed').value = used;
-                form.querySelector('#editEventOption').value = event_id;
-                form.querySelector('#editEventName').value = event_name;
-            });
-        });
-
-        var eventOptionElement = document.getElementById("editEventOption");
-        eventOptionElement.addEventListener("change", function() {
-            var selectedEventOption = this.options[this.selectedIndex];
-            var eventName = selectedEventOption.text;
-            document.getElementById("editEventName").value = eventName;
+            var form = document.getElementById('editDataForm');
+            form.action = action;
+            form.querySelector('#editSerial').value = serial;
+            form.querySelector('#editCondition').value = condition;
+            form.querySelector('#editStatus').value = status;
+            form.querySelector('#editNote').value = note;
         });
     });
+});
 </script>
-

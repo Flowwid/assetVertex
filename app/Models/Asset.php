@@ -16,4 +16,8 @@ class Asset extends Model
         'type',
         'specification',
     ];
+
+    public function bom() {
+        return $this->hasMany(Bom::class);
+    }
 }

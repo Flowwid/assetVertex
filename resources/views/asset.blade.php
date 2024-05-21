@@ -4,12 +4,12 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Asset') }}
         </h2>
-        <div>
+        <div class="flex space-x-2">
             <a href="#" class="text-sm hover:text-gray-700 btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDataModal">Add Data</a>
             <form action="{{ route('asset.export') }}" method="POST">
-    @csrf
-    <button type="submit" class="text-sm hover:text-gray-700 btn btn-grey btn-export">Export Data</button>
-</form>
+                @csrf
+                <button type="submit" class="text-sm hover:text-gray-700 btn btn-grey btn-export">Export Data</button>
+            </form>
         </div>
     </div>
 </x-slot>
@@ -148,6 +148,7 @@
                             <td class="px-4 py-2">{{$asset->name}}</td>
                             <td class="px-4 py-2">{{$asset->type}}</td>
                             <td class="px-4 py-2">{{$asset->specification}}</td>
+                            <td><a href="{{ route('bom.index', ['asset_id' => $asset->id]) }}" class="btn btn-outline-primary">Detail</a></td>
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="#" class="edit-btn" 
                                 data-name="{{$asset->name}}" data-type="{{$asset->type}}" data-specification="{{$asset->specification}}"

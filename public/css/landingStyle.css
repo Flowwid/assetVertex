@@ -49,6 +49,11 @@ nav {
     padding: 10px;
 }
 
+.login:hover{
+    background-color: #381DDB;
+    color: white;
+}
+
 .head {
     position: absolute;
     top: 50%;
