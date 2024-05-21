@@ -111,9 +111,9 @@
                             <td class="px-4 py-2">{{$budget->name}}</td>
                             <td class="px-4 py-2">{{$budget->year}}</td>
                             <td class="px-4 py-2">{{$budget->nominal}}</td>
-                            <td><a href="{{ route('fund.index', ['budget_id' => $budget->id]) }}">Detail</a></td>
+                            <td><a href="{{ route('fund.index', ['budget_id' => $budget->id]) }}" class="btn btn-outline-primary">Detail</a></td>
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class="edit-btn" 
+                                <a href="#" class="edit-btn btn btn-warning" 
                                 data-name="{{$budget->name}}" data-year="{{$budget->year}}" data-nominal="{{$budget->nominal}}"
                                 data-action="{{route('budget.update', ['budget_id' => $budget->id])}}"
                                 data-bs-toggle="modal" data-bs-target="#editDataModal">Edit</a>
@@ -123,7 +123,7 @@
                                 <form method="post" action="{{route('budget.delete', ['budget_id' => $budget])}}">
                                     @csrf
                                     @method('delete')
-                                    <input type="submit" value="Delete" class="text-red-600 hover:text-red-900"></input>
+                                    <input type="submit" value="Delete" class="btn btn-danger"></input>
                                 </form>
                             </td>
                         </tr>

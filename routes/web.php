@@ -48,6 +48,9 @@ Route::middleware('auth')->group(function () {
 
     //FUND
     Route::get('/budget/{budget_id}/fund/', [FundController::class, 'index'])->name('fund.index');
+    Route::post('/budget/{budget_id}/fund/', [FundController::class, 'insert'])->name('fund.insert');
+    Route::put('/budget/{budget_id}/fund/{fund_id}/update', [FundController::class, 'update'])->name('fund.update');
+    Route::delete('/budget/{budget_id}/fund/{fund_id}/delete', [FundController::class, 'delete'])->name('fund.delete');
 
 
     //ALLOCATION

@@ -27,16 +27,15 @@ class BudgetController extends Controller
     }
     
     public function edit($budget_id){
-        $division = Budget::findOrFail($budget_id);
-        return view('edit', ['budget_id' => $division]);
+        $budget = Budget::findOrFail($budget_id);
+        return view('edit', ['budget_id' => $budget]);
     }    
 
-    public function update(budget $budget_id, Request $request){
+    public function update(Budget $budget_id, Request $request){
         $data = $request->validate([
             'name' => 'required',
             'year' => 'required',
             'nominal' => 'required',
-
         ]);
 
         $budget_id->update($data);

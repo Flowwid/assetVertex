@@ -18,13 +18,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form method="post">
+            <form method="post" action="{{ route('fund.insert', ['budget_id' => $budgets->id]) }}">
                 @csrf
                 @method('post')
                     <!-- Input fields -->
                     <div class="mb-3">
                         <label for="used" class="form-label">Used</label>
                         <input type="number" class="form-control" name="used" id="used" placeholder="Enter Used Nominal">
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" class="form-control" name="event_name" id="event_name" placeholder="Enter Used Nominal" value="{{ $budgets->name }}">
                     </div>
                     <div class="mb-3">
                         <label for="event-option" class="form-label">Event</label>
@@ -44,6 +47,44 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Update -->
+<div class="modal fade" id="editDataModal" tabindex="-1" aria-labelledby="editDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editDataModalLabel">Edit Fund</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editDataForm" method="post" action="">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-3">
+                        <label for="editUsed" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="used" id="editUsed" placeholder="Enter used nominal">
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" class="form-control" name="event_name" id="editEventName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="event-option" class="form-label">Event</label>
+                        <select class="form-control" id="editEventOption" name="event_id">
+                            @foreach ($events as $event)
+                                <option value="{{ $event->id }}">{{ $event->name }}</option>
+                            @endforeach
+                        </select>
+                    </div> 
+                    <div class="modal-footer">
+                        <input type="submit" value="Edit" class="btn btn-primary" id="saveDataButton">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- body -->
 <div class="py-12">
@@ -72,21 +113,19 @@
                         <tr>
                             <td class="px-4 py-2">{{$fund->used}}</td>
                             <td class="px-4 py-2">{{$fund->event_name}}</td>
-                            {{-- <td><a href="{{ route('fund.index', ['budget_id' => $budget->id]) }}">Detail</a></td>
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class="edit-btn" 
-                                data-name="{{$budget->name}}" data-year="{{$budget->year}}" data-nominal="{{$budget->nominal}}"
-                                data-action="{{route('budget.update', ['budget_id' => $budget->id])}}"
+                                <a href="#" class="edit-btn btn btn-warning" 
+                                data-used="{{$fund->used}}" data-event-id="{{$fund->event_id}}" data-event-name="{{$fund->event_name}}"
+                                data-action="{{route('fund.update', ['fund_id' => $fund->id, 'budget_id' => $fund->budget_id])}}"
                                 data-bs-toggle="modal" data-bs-target="#editDataModal">Edit</a>
                             </td>
-
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                                <form method="post" action="{{route('budget.delete', ['budget_id' => $budget])}}">
+                                <form method="post" action="{{ route('fund.delete', ['budget_id' => $fund->budget_id, 'fund_id' => $fund->id]) }}">
                                     @csrf
                                     @method('delete')
-                                    <input type="submit" value="Delete" class="text-red-600 hover:text-red-900"></input>
+                                    <input type="submit" value="Delete" class="btn btn-danger"></input>
                                 </form>
-                            </td> --}}
+                            </td>                            
                         </tr>
                         @endforeach
                     </tbody>
@@ -97,3 +136,40 @@
 </div>
 
 </x-app-layout>
+
+<script>
+    document.getElementById("event-option").addEventListener("change", function() {
+        var selectedEventOption = this.options[this.selectedIndex];
+        var eventName = selectedEventOption.text;
+        document.getElementById("event_name").value = eventName; 
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var editButtons = document.querySelectorAll('.edit-btn');
+        
+        editButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var used = this.getAttribute('data-used');
+                var event_id = this.getAttribute('data-event-id');
+                var event_name = this.getAttribute('data-event-name');
+                var action = this.getAttribute('data-action');
+
+                var form = document.getElementById('editDataForm');
+                form.action = action;
+                form.querySelector('#editUsed').value = used;
+                form.querySelector('#editEventOption').value = event_id;
+                form.querySelector('#editEventName').value = event_name;
+            });
+        });
+
+        var eventOptionElement = document.getElementById("editEventOption");
+        eventOptionElement.addEventListener("change", function() {
+            var selectedEventOption = this.options[this.selectedIndex];
+            var eventName = selectedEventOption.text;
+            document.getElementById("editEventName").value = eventName;
+        });
+    });
+</script>
+
