@@ -10,7 +10,7 @@ use App\Http\Controllers\FundController;
 use App\Http\Controllers\MaintenanceController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome2');
 });
 
 //DASHBOARD
