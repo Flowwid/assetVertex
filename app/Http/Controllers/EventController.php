@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Fund;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
     public function index(){
+        $totalUsed = Fund::selectRaw('event_id, SUM(used) as nominal')->groupBy('event_id')->get();
+
+        foreach ($totalUsed as $totalNominal) {
+            Event::where('id', $totalNominal->event_id)->update(['nominal' => $totalNominal->nominal]);
+        }
+
         $event = Event::all();
+
         return view('event', ['lists' => $event]);
     }
 
