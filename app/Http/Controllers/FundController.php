@@ -23,19 +23,34 @@ class FundController extends Controller
     }
 
     public function insert(Request $request, $budget_id) {
-        $budgets = Budget::findOrFail($budget_id);
+    $request->validate([
+        'used' => 'required|numeric|min:0',
+        'event_id' => 'required|integer',
+        'event_name' => 'required|string',
+    ]);
 
-        $data = new Fund();
-        $data->used = $request->used;
-        $data->event_id = $request->event_id;
-        $data->event_name = $request->event_name;
-        $data->budget_id = $budgets->id;
-        $data->budget_name = $budgets->name;
+    $budgets = Budget::findOrFail($budget_id);
 
-        $data->save();
+    $totalUsed = Fund::where('budget_id', $budget_id)->sum('used');
 
-        return redirect(route('fund.index', $budget_id));
+    if (($totalUsed + $request->used) > $budgets->nominal) {
+        return redirect()->back()->withErrors(['used' => 'The total used amount exceeds the available budget.'])
+                             ->with('alert', 'The total used amount exceeds the available budget.')
+                             ->withInput();
     }
+
+    $data = new Fund();
+    $data->used = $request->used;
+    $data->event_id = $request->event_id;
+    $data->event_name = $request->event_name;
+    $data->budget_id = $budgets->id;
+    $data->budget_name = $budgets->name;
+
+    $data->save();
+
+    return redirect(route('fund.index', $budget_id));
+}
+
 
     public function edit($budget_id, $fund_id) {
         $budget = Budget::findOrFail($budget_id);

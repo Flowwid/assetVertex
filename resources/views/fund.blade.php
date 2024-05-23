@@ -85,10 +85,15 @@
     </div>
 </div>
 
-
 <!-- body -->
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        @if (session('alert'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ session('alert') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6">
                 <table class="min-w-full divide-y divide-gray-200">
