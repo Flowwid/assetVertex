@@ -9,15 +9,16 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\FundController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\BomController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome2');
 });
 
 //DASHBOARD
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'chart'])->name('dashboard');
+});
 
 //AUTHENTICATION
 Route::middleware('auth')->group(function () {
@@ -52,9 +53,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/budget/{budget_id}/fund/{fund_id}/update', [FundController::class, 'update'])->name('fund.update');
     Route::delete('/budget/{budget_id}/fund/{fund_id}/delete', [FundController::class, 'delete'])->name('fund.delete');
 
-
-    //ALLOCATION
-
     //ASSET
     Route::get('/asset', [AssetController::class, 'index'])->name('asset.index');
     Route::post('/asset/insert', [AssetController::class, 'insert'])->name('asset.insert');
@@ -63,7 +61,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/asset/{asset_id}/delete', [AssetController::class, 'delete'])->name('asset.delete');
     Route::post('/asset/import', [AssetController::class, 'import'])->name('asset.import');
     Route::post('/asset/export', [AssetController::class, 'export'])->name('asset.export');
-
 
     //BOM
     Route::get('/asset/{asset_id}/bom/', [BomController::class, 'index'])->name('bom.index');
@@ -77,6 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-bom-serials', [MaintenanceController::class, 'getBomSerials'])->name('getBomSerials');
     Route::delete('/maintenance/{maintenance_id}/delete', [MaintenanceController::class, 'delete'])->name('maintenance.delete');
     Route::put('/maintenance/{maintenance_id}/update', [MaintenanceController::class, 'update'])->name('maintenance.update');
+
 });
 
 require __DIR__.'/auth.php';
