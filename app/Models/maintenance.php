@@ -15,6 +15,7 @@ class Maintenance extends Model
         'date',
         'description',
         'status',
+        'image',
         'asset_id',
         'asset_name',
         'bom_id',

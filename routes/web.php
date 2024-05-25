@@ -39,7 +39,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/budget/{budget_id}/update', [BudgetController::class, 'update'])->name('budget.update');
     Route::delete('/budget/{budget_id}/delete', [BudgetController::class, 'delete'])->name('budget.delete');
 
-
     //EVENT
     Route::get('/event', [EventController::class, 'index'])->name('event.index');
     Route::post('/event', [EventController::class, 'insert'])->name('event.insert');
@@ -74,8 +73,10 @@ Route::middleware('auth')->group(function () {
 
     //MAINTENANCE
     Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maintenance.index');
-
-
+    Route::post('/maintenance/insert', [MaintenanceController::class, 'insert'])->name('maintenance.insert');
+    Route::get('/get-bom-serials', [MaintenanceController::class, 'getBomSerials'])->name('getBomSerials');
+    Route::delete('/maintenance/{maintenance_id}/delete', [MaintenanceController::class, 'delete'])->name('maintenance.delete');
+    Route::put('/maintenance/{maintenance_id}/update', [MaintenanceController::class, 'update'])->name('maintenance.update');
 });
 
 require __DIR__.'/auth.php';

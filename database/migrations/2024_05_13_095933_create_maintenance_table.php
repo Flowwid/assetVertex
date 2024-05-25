@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('date');
             $table->string('description');
             $table->string('status');
+            $table->string('image');
             $table->unsignedBigInteger('asset_id');
             $table->string('asset_name');
             $table->unsignedBigInteger('bom_id');
