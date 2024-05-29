@@ -17,7 +17,7 @@ class MaintenanceController extends Controller
         $asset = Asset::all();
         $division = Division::all();
 
-        return view('maintenance', [
+        return view('Maintenance', [
             'maintenance' => $maintenance,
             'bom' => $bom,
             'asset' => $asset,
