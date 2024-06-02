@@ -25,8 +25,8 @@
                 </div>
                 <div class="header"> 
                     <x-auth-session-status class="mb-4" :status="session('status')" />
-                    <h2>Login To Your Account!</h2>
-                    <p>Fill the information below to get back into your asset management.</p>
+                    <h2>Register Individual Account!</h2>
+                    <p>For the purpose of industry regulation, your details are required.</p>
                 </div> 
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
