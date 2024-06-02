@@ -67,14 +67,14 @@ class MaintenanceController extends Controller
 
     public function update(Maintenance $maintenance_id, Request $request){
         $data = $request->validate([
-            'name' => 'required',
-            
+            'status' => 'required|in:On-Repair,Repaired', // Validate only the status field
         ]);
-
+    
         $maintenance_id->update($data);
-
-        return redirect(route('maintenance.index'))->with('success', 'Maintenance is updated');
+    
+        return redirect(route('maintenance.index'))->with('success', 'Maintenance status updated successfully');
     }
+    
 
     public function delete(Maintenance $maintenance_id){
         $maintenance_id->delete();

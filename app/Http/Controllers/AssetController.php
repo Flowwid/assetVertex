@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AssetExport;
+use App\Exports\BomExport;
+use App\Exports\CombinedExport;
 
 class AssetController extends Controller
 {
@@ -55,7 +57,7 @@ class AssetController extends Controller
 
     public function export() 
     {
-        return Excel::download(new AssetExport, 'Asset.xlsx');
+        return Excel::download(new CombinedExport, 'Assets_And_Bom.xlsx');
     }
 
     public function edit($asset_id){

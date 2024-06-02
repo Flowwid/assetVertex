@@ -27,12 +27,18 @@
                         <input type="text" class="form-control" name="serial" id="serial" placeholder="Enter Serial">
                     </div>
                     <div class="mb-3">
-                        <label for="condition" class="form-label">Condition</label>
-                        <input type="text" class="form-control" name="condition" id="condition" placeholder="Enter Condition">
+                        <label for="type" class="form-label">Condition</label>
+                        <select class="form-control" name="condition" id="editCondition">
+                            <option value="Broken">Broken</option>
+                            <option value="Working">Working</option>
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <input type="text" class="form-control" name="status" id="status" placeholder="Enter Status">
+                        <label for="type" class="form-label">Status</label>
+                        <select class="form-control" name="status" id="editStatus">
+                            <option value="Available">Available</option>
+                            <option value="Assigned">Assigned</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="note" class="form-label">Note</label>
@@ -66,12 +72,18 @@
                         <input type="text" class="form-control" name="serial" id="editSerial" placeholder="Enter Serial">
                     </div>
                     <div class="mb-3">
-                        <label for="condition" class="form-label">Condition</label>
-                        <input type="text" class="form-control" name="condition" id="editCondition" placeholder="Enter Condition">
+                        <label for="type" class="form-label">Condition</label>
+                        <select class="form-control" name="condition" id="editCondition">
+                            <option value="Broken">Broken</option>
+                            <option value="Working">Working</option>
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <input type="text" class="form-control" name="status" id="editStatus" placeholder="Enter Status">
+                        <label for="type" class="form-label">Status</label>
+                        <select class="form-control" name="status" id="editStatus">
+                            <option value="Available">Available</option>
+                            <option value="Assigned">Assigned</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="note" class="form-label">Note</label>

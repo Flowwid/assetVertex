@@ -34,8 +34,11 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="status" class="form-label">Status</label>
-                        <input type="text" class="form-control" name="status" id="status" placeholder="Enter status">
+                        <label for="type" class="form-label">Condition</label>
+                        <select class="form-control" name="status" id="status">
+                            <option value="On-Repair">On-Repair</option>
+                            <option value="Repaired">Repaired</option>
+                        </select>
                     </div>
 
                     <div class="mb-3">
@@ -102,9 +105,22 @@
                         <h5 class="card-title">Asset Name: {{ $maintenanceItem->asset_name }}</h5>
                         <p class="card-text"><strong>Date:</strong> {{ $maintenanceItem->date }}</p>
                         <p class="card-text"><strong>Description:</strong> {{ $maintenanceItem->description }}</p>
-                        <p class="card-text"><strong>Status:</strong> {{ $maintenanceItem->status }}</p>
+                        
                         <p class="card-text"><strong>Serial ID:</strong> {{ $maintenanceItem->bom_serial }}</p>
                         <p class="card-text"><strong>Division Requester:</strong> {{ $maintenanceItem->division_name }}</p>
+                        <!-- Status dropdown -->
+                        <form action="{{ route('maintenance.update', ['maintenance_id' => $maintenanceItem]) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group mb-3" style="display:flex; align-items:center; text-align:center; gap: 15px;">
+                                <p class="card-text"><strong>Status:</strong></p>
+                                <select class="form-control" id="status" name="status" onchange="this.form.submit()" style="width: 150px;">
+                                    <option value="On-Repair" {{ $maintenanceItem->status === 'On-Repair' ? 'selected' : '' }}>On-Repair</option>
+                                    <option value="Repaired" {{ $maintenanceItem->status === 'Repaired' ? 'selected' : '' }}>Repaired</option>
+                                </select>
+                            </div>
+                        </form>
+                        <!-- End Status dropdown -->
                         <!-- Edit and Delete buttons -->
                         <div class="mt-3">
                             <form action="{{route('maintenance.delete', ['maintenance_id' => $maintenanceItem])}}" method="POST" style="display: inline-block;">
@@ -120,6 +136,7 @@
         </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </x-app-layout>

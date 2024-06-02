@@ -1,8 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Dashboard') }}
+            </h2>
+            <a href="#" id="downloadCharts" class="text-sm hover:text-gray-700 btn btn-primary">Download Chart</a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -105,6 +108,30 @@
                     }
                 }
             });
+
+            function downloadCombinedChart() {
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                var width = Math.max(assetChart.width, budgetChart.width, eventChart.width);
+                var height = assetChart.height + budgetChart.height + eventChart.height;
+
+                canvas.width = width;
+                canvas.height = height;
+
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, width, height);
+
+                ctx.drawImage(assetChart.canvas, 0, 0);
+                ctx.drawImage(budgetChart.canvas, 0, assetChart.height);
+                ctx.drawImage(eventChart.canvas, 0, assetChart.height + budgetChart.height);
+
+                var link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'CombinedChart.png';
+                link.click();
+            }
+
+            document.getElementById('downloadCharts').addEventListener('click', downloadCombinedChart);
         });
     </script>
 </x-app-layout>

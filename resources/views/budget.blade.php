@@ -33,7 +33,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="nominal" class="form-label">Nominal</label>
-                        <input type="text" class="form-control" name="nominal" id="nominal" placeholder="Enter nominal">
+                        <input type="number" class="form-control" name="nominal" id="nominal" placeholder="Enter nominal">
                     </div>
                     <!-- End input fields -->
                 </div>

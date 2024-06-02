@@ -51,7 +51,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="type" class="form-label">Type</label>
-                                <input type="text" class="form-control" name="type" id="type" placeholder="Enter Type">
+                                <select class="form-control" name="type" id="type">
+                                    <option value="electronic">Electronic</option>
+                                    <option value="atk">ATK</option>
+                                    <option value="furniture">furniture</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="specification" class="form-label">Specification</label>
@@ -100,8 +104,12 @@
                     <input type="text" class="form-control" name="name" id="editName" placeholder="Enter name">
                 </div>
                 <div class="mb-3">
-                    <label for="editType" class="form-label">Type</label>
-                    <input type="text" class="form-control" name="type" id="editType" placeholder="Enter Type">
+                    <label for="type" class="form-label">Type</label>
+                    <select class="form-control" name="type" id="type">
+                        <option value="electronic">Electronic</option>
+                        <option value="atk">ATK</option>
+                        <option value="furniture">furniture</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="editSpecification" class="form-label">Specification</label>
