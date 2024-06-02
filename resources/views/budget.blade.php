@@ -80,6 +80,31 @@
     </div>
 </div>
 
+<!-- Delete Confirmation Modal -->
+@foreach($lists as $budget)
+<div class="modal fade" id="deleteConfirmationModal{{$budget->id}}" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel{{$budget->id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel{{$budget->id}}">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this budget?
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="{{ route('budget.delete', ['budget_id' => $budget->id]) }}">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 <!-- body -->
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -120,11 +145,10 @@
                             </td>
 
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                                <form method="post" action="{{route('budget.delete', ['budget_id' => $budget])}}">
-                                    @csrf
-                                    @method('delete')
-                                    <input type="submit" value="Delete" class="btn btn-danger"></input>
-                                </form>
+                                <button type="button" class="delete-btn btn btn-danger" 
+                                        data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal{{$budget->id}}">
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                         @endforeach

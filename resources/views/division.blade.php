@@ -71,6 +71,32 @@
     </div>
 </div>
 
+<!-- Delete Confirmation Modal -->
+@foreach($lists as $division)
+<div class="modal fade" id="deleteConfirmationModal{{$division->id}}" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel{{$division->id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel{{$division->id}}">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this division?
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="{{ route('division.delete', ['division_id' => $division->id]) }}">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+
 <!-- body -->
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -107,11 +133,10 @@
                             </td>
 
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                                <form method="post" action="{{route('division.delete', ['division_id' => $division])}}">
-                                    @csrf
-                                    @method('delete')
-                                    <input type="submit" value="Delete" class="text-red-600 hover:text-red-900"></input>
-                                </form>
+                                <button type="button" class="delete-btn btn btn-danger" 
+                                        data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal{{$division->id}}">
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                         @endforeach

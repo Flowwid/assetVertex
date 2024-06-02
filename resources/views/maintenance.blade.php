@@ -93,6 +93,31 @@
     </div>
 </div>
 
+@foreach($maintenance as $maintenanceItem)
+<div class="modal fade" id="deleteConfirmationModal{{$maintenanceItem->id}}" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel{{$maintenanceItem->id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel{{$maintenanceItem->id}}">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this Maintenance item?
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="{{ route('maintenance.delete', ['maintenance_id' => $maintenanceItem->id]) }}">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+
 <!-- body -->
 <div class="py-12">
     <div class="container">
@@ -123,11 +148,9 @@
                         <!-- End Status dropdown -->
                         <!-- Edit and Delete buttons -->
                         <div class="mt-3">
-                            <form action="{{route('maintenance.delete', ['maintenance_id' => $maintenanceItem])}}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal{{$maintenanceItem->id}}">
+                                Delete
+                            </button>
                         </div>
                     </div>
                 </div>

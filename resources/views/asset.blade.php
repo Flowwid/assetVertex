@@ -125,6 +125,31 @@
     </div>
 </div>
 
+<!-- Delete Confirmation Modal -->
+@foreach($lists as $asset)
+<div class="modal fade" id="deleteConfirmationModal{{$asset->id}}" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel{{$asset->id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel{{$asset->id}}">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this asset?
+            </div>
+            <div class="modal-footer">
+                <form method="post" action="{{ route('asset.delete', ['asset_id' => $asset->id]) }}">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 <!-- body -->
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -164,11 +189,10 @@
                                 data-bs-toggle="modal" data-bs-target="#editDataModal">Edit</a>
                             </td>
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                                <form method="post" action="{{route('asset.delete', ['asset_id' => $asset])}}">
-                                    @csrf
-                                    @method('delete')
-                                    <input type="submit" value="Delete" class="text-red-600 hover:text-red-900"></input>
-                                </form>
+                                <button type="button" class="delete-btn btn btn-danger" 
+                                        data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal{{$asset->id}}">
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                         @endforeach
