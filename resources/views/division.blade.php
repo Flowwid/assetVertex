@@ -126,7 +126,7 @@
                             <td class="px-4 py-2">{{$division->description}}</td>
 
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class="edit-btn" 
+                                <a href="#" class="edit-btn btn btn-warning" 
                                 data-name="{{$division->name}}" data-description="{{$division->description}}"
                                 data-action="{{route('division.update', ['division_id' => $division->id])}}"
                                 data-bs-toggle="modal" data-bs-target="#editDataModal">Edit</a>

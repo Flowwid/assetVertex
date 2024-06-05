@@ -183,7 +183,7 @@
                             <td class="px-4 py-2">{{$asset->specification}}</td>
                             <td><a href="{{ route('bom.index', ['asset_id' => $asset->id]) }}" class="btn btn-outline-primary">Detail</a></td>
                             <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class="edit-btn" 
+                                <a href="#" class="edit-btn btn btn-warning" 
                                 data-name="{{$asset->name}}" data-type="{{$asset->type}}" data-specification="{{$asset->specification}}"
                                 data-action="{{route('asset.update', ['asset_id' => $asset->id])}}"
                                 data-bs-toggle="modal" data-bs-target="#editDataModal">Edit</a>
