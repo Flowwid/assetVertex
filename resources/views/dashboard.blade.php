@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Dashboard') }}
             </h2>
-            <a href="#" id="downloadCharts" class="text-sm hover:text-gray-700 btn btn-primary">Download Chart</a>
+            <a href="#" id="downloadCharts" class="text-sm hover:text-gray-700 btn btn-primary">Export Chart</a>
         </div>
     </x-slot>
 
