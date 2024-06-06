@@ -1,3 +1,5 @@
+<link rel="icon" href="../../images/logo_blue.png" type="image/x-icon">
+<title>Asset Vertex</title>
 <x-guest-layout>
     <div class="bg">  
         <div class="bg2" >
