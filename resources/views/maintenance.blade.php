@@ -25,17 +25,17 @@
                     <!-- Input fields -->
                     <div class="mb-3">
                         <label for="date" class="form-label">Date</label>
-                        <input type="date" class="form-control" name="date" id="date" placeholder="Enter date">
+                        <input type="date" class="form-control" name="date" id="date" placeholder="Enter date" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" name="description" id="description" placeholder="Enter description">
+                        <input type="text" class="form-control" name="description" id="description" placeholder="Enter description" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="type" class="form-label">Condition</label>
-                        <select class="form-control" name="status" id="status">
+                        <select class="form-control" name="status" id="status" required>
                             <option value="On-Repair">On-Repair</option>
                             <option value="Repaired">Repaired</option>
                         </select>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="asset-option" class="form-label">Asset</label>
-                        <select class="form-control" id="asset-option" name="asset_id">
+                        <select class="form-control" id="asset-option" name="asset_id" required>
                             @foreach ($asset as $asset)
                                 <option value="{{ $asset->id }}">{{ $asset->name }}</option>
                             @endforeach
@@ -58,7 +58,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="bom-option" class="form-label">Bom Serial</label>
-                        <select class="form-control" id="bom-option" name="bom_id">
+                        <select class="form-control" id="bom-option" name="bom_id" required>
                             @foreach ($bom as $bom)
                                 <option value="{{ $bom->id }}">{{ $bom->serial }}</option>
                             @endforeach
@@ -70,7 +70,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="division-option" class="form-label">Division Name</label>
-                        <select class="form-control" id="division-option" name="division_id">
+                        <select class="form-control" id="division-option" name="division_id" required>
                             @foreach ($division as $division)
                                 <option value="{{ $division->id }}">{{ $division->name }}</option>
                             @endforeach
